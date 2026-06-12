@@ -28,7 +28,7 @@ Mobile web app for **Veryan / Clarion** staff to digitise **Work Experience Refe
 | DNS (GoDaddy) | A record: `scan` → `76.76.21.21` |
 
 Git remote (SSH): `git@github.com:alvarodoze/sirrond-scan-app.git`  
-Git root is **`web/`** only — parent `SirrondOCR/` has pilot + supabase SQL outside git.
+Git root is **`web/`** only — parent `SirrondOCR/` has supabase SQL + GDPR docs outside git.
 
 ---
 
@@ -114,18 +114,6 @@ npx vercel deploy --prod --yes          # or CLI deploy
 Docs: `docs/vercel-deploy.md`
 
 **Note:** Vercel GitHub auto-deploy may need Login Connection linked in Vercel account settings.
-
----
-
-## Pilot / test OCR without app
-
-```bash
-cd SirrondOCR
-# MISTRAL_API_KEY in .env
-python3 pilot/mistral_ocr_pilot.py
-```
-
-Output: `pilot/output/extracted.json`
 
 ---
 

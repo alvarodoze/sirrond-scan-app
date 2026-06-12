@@ -42,24 +42,14 @@ export function CameraCapture({ onCapture, disabled, resetKey }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 text-center">
-        {preview ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={preview}
-            alt="Form preview"
-            className="max-h-full max-w-full rounded-lg object-contain"
-          />
-        ) : (
-          <>
-            <div className="mb-3 text-4xl">📷</div>
-            <p className="font-medium text-slate-800">Photograph the form</p>
-            <p className="mt-1 text-xs text-slate-500">
-              Good light, flat surface, fill the frame
-            </p>
-          </>
-        )}
-      </div>
+      {preview && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={preview}
+          alt="Form preview"
+          className="w-full rounded-2xl object-contain"
+        />
+      )}
 
       {!preview && (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

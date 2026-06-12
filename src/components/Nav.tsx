@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useLocalStorage } from "@/lib/config";
 import { createClient } from "@/lib/supabase/client";
 
 const links = [
@@ -14,6 +15,7 @@ const links = [
 export function Nav() {
   const pathname = usePathname();
   const router = useRouter();
+  const localMode = useLocalStorage();
 
   if (pathname === "/login") return null;
 
@@ -42,12 +44,14 @@ export function Nav() {
               {l.label}
             </Link>
           ))}
-          <button
-            onClick={logout}
-            className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-500 hover:bg-slate-100"
-          >
-            Log out
-          </button>
+          {!localMode && (
+            <button
+              onClick={logout}
+              className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-500 hover:bg-slate-100"
+            >
+              Log out
+            </button>
+          )}
         </div>
       </div>
     </nav>

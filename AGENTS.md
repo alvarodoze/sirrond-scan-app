@@ -14,7 +14,7 @@ Low-fi Parseur for **Clarion WEX Referral** forms: photo → Mistral OCR → sta
 ## Repo layout
 
 ```
-SirrondOCR/                    # parent folder (not all in git)
+SirrondOCR/
 ├── web/                       # ← GIT ROOT — Next.js app, deploy this
 │   ├── src/app/               # pages: scan, review, form, history
 │   ├── src/app/api/extract/   # Mistral OCR proxy (no image stored)
@@ -23,7 +23,6 @@ SirrondOCR/                    # parent folder (not all in git)
 │   ├── src/lib/export.ts      # Excel + Google Sheets payload
 │   ├── src/lib/config.ts      # local vs supabase mode
 │   └── docs/                  # vercel-deploy, google-sheets-setup
-├── pilot/                     # standalone Python Mistral test script
 └── supabase/migrations/       # for when DB access is ready
 ```
 
@@ -68,14 +67,11 @@ cd web
 npm install && npm run dev          # http://localhost:3000
 npm run build                       # verify before deploy
 npx vercel deploy --prod --yes      # redeploy (CLI linked)
-python3 ../pilot/mistral_ocr_pilot.py  # OCR-only test (needs ../.env or MISTRAL_API_KEY)
 ```
 
 ## Form schema (WEX Referral)
 
 30 fields in `WEX_REFERRAL_SCHEMA`: school (from logo), student_name, DOB, employer block, insurance checkboxes, parent section. Required: `school`, `student_name`, `date_of_birth`, `employer_name_and_address`.
-
-Sample form image: parent `.cursor/.../assets/image-d2eec029-....png` (WEX form, Clarion).
 
 ## GDPR
 
@@ -91,8 +87,3 @@ Docs in parent `../docs/gdpr/` (DPIA template, privacy notice, sub-processors). 
 ## Full detail
 
 See `docs/PROJECT_HANDOFF.md`
-
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
-Next.js 16 — read `node_modules/next/dist/docs/` if unsure. App uses middleware (auth skip in local mode).
-<!-- END:nextjs-agent-rules -->

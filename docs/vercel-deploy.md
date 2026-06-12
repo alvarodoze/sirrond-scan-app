@@ -12,6 +12,37 @@ Staff open the custom domain on iPhone → scan → confirm → new tab in Googl
 
 ---
 
+## Deploy without wasting build minutes
+
+**Use Git → Vercel, not repeated CLI deploys.** Each build costs the same whether you run `npx vercel deploy --prod` or push to GitHub — but Git only builds when you actually push.
+
+| Do | Don't |
+|----|--------|
+| Push to `main` when app code changes | Run `vercel deploy --prod` after every small tweak |
+| Change env vars in Vercel dashboard, then **Redeploy** once | Redeploy after every env test |
+| Keep **Preview deployments** off if you don't use PR previews | Let every branch/PR trigger a build |
+| Commit docs (`*.md`, `docs/`) separately — builds are skipped | Mix doc-only edits with code in the same commit |
+
+This repo includes `vercel.json` **Ignored Build Step**: commits that only touch `docs/`, `*.md`, or `AGENTS.md` skip the build (exit code trick — no minutes used).
+
+**One-time Vercel settings** (Project → Settings → Git):
+
+1. **Production Branch:** `main`
+2. **Preview Deployments:** disable if you don't need PR previews (~half your builds if you use branches)
+3. **Connect GitHub** so pushes deploy automatically — no CLI needed day-to-day
+
+**Typical workflow:**
+
+```bash
+cd web
+npm run build          # verify locally first (free)
+git push origin main   # one production build on Vercel
+```
+
+Only use `npx vercel deploy --prod --yes` for the first deploy or if GitHub isn't connected yet.
+
+---
+
 ## 1. Push code to GitHub
 
 From the `web/` folder (this is the git repo):
